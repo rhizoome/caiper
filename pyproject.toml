@@ -5,12 +5,8 @@ description = ""
 authors = ["Jean-Louis Fuchs <safe.pen2857@rhizoome.ch>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.11"
 pycairo = "^1.20.0"
-
-[tool.poetry.dev-dependencies]
-pytest = "^5.2"
-pdbpp = "^0.10.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.3.1"

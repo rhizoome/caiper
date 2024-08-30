@@ -14,6 +14,7 @@ def norm_col(*args):
 
 
 cbackground = norm_col(254, 246, 228)
+cdark = norm_col(180, 140, 100)
 cmajor = norm_col(208, 210, 211)
 lmajor = 0.8
 cminor = norm_col(239, 223, 215)
@@ -69,14 +70,30 @@ def page(margin, width, height, grid, bg=True, dot=False):
         func(srf, margin, twidth, height, grid, bg)
 
 
-def page_dot(srf, margin, twidth, height, grid, bg=True):
+def page_dot(srf, _, twidth, height, grid, bg=True):
     ctx = cairo.Context(srf)
     x = grid
-    ctx.set_source_rgb(*cmajor)
+    xt = True
+    ctx.set_source_rgb(*cdark)
+    div = 6.0
+    if height > 290:
+        div = 8.0
     while x < twidth:
+        if xt:
+            x -= grid / div
+        xt = not xt
         y = grid
+        yt = True
         while y < height:
-            ctx.arc(x, y, 0.5, 0, 2 * math.pi)
+            if yt:
+                y -= grid / div
+            yt = not yt
+            size = 0.45
+            if (x < (grid * 1.5) and yt) or (x > (twidth - grid)) and not yt:
+                size = 0.8
+            if (y < (grid * 1.5) and not xt) or (y > (height - grid)) and xt:
+                size = 0.8
+            ctx.arc(x, y, size, 0, 2 * math.pi)
             ctx.fill()
             y += grid
         x += grid
