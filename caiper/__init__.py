@@ -76,7 +76,7 @@ def page_dot(srf, _, twidth, height, grid, bg=True):
     xt = True
     ctx.set_source_rgb(*cdark)
     div = 6.0
-    if height > 290:
+    if height > 800:  # Is A4
         div = 8.0
     while x < twidth:
         if xt:
